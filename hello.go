@@ -4,8 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -25,6 +27,7 @@ func main() {
 			IniciarMonitoraramento()
 		} else if op == 2 {
 			fmt.Println("Mostrando Logs...")
+			MostarLogs()
 		} else if op == 3 {
 			os.Exit(0)
 		} else {
@@ -40,7 +43,7 @@ func Introducao() {
 	versao := "1.2"
 
 	fmt.Println("Olá,", nome)
-	fmt.Println("A versão do seu sistema é", versao)
+	fmt.Println("A versão do seu sistema é " + versao + ".")
 }
 
 func MostraMenu() {
@@ -69,7 +72,7 @@ func IniciarMonitoraramento() {
 
 	for cont := 0; cont < monitoramentos; cont++ {
 		for nsite, site := range sites {
-			fmt.Println("Iniciando monitoramento no site:", nsite, "->", site)
+			fmt.Println("Iniciando monitoramento no site:", nsite, "-> "+site)
 			TestaSite(site)
 		}
 		time.Sleep(intervalo * time.Minute)
@@ -85,8 +88,10 @@ func TestaSite(site string) {
 
 	if resp.StatusCode == 200 {
 		fmt.Println("Site:", site, "foi carregado com sucesso!")
+		RegistraLog(site, true)
 	} else {
 		fmt.Println("Site:", site, "está com problemas. StatusCode:", resp.StatusCode)
+		RegistraLog(site, false)
 	}
 	fmt.Println("--------------------------------------------------------")
 
@@ -95,23 +100,49 @@ func TestaSite(site string) {
 func LerSitesDoArquivo() []string {
 
 	sites := []string{}
+
 	arquivo, err := os.Open("sites.txt")
+
 	if err != nil {
-		fmt.Println("Ocorreu um erro.", err)
+		fmt.Println("Ocorreu um erro:", err)
 	}
 
 	arq_lido := bufio.NewReader(arquivo)
 	for {
 		linha, err := arq_lido.ReadString('\n')
 		linha = strings.TrimSpace(linha)
+
 		sites = append(sites, linha)
 
 		if err == io.EOF {
 			break
 		}
-		
-	arquivo.Close()
+
 	}
 
+	arquivo.Close()
 	return sites
+}
+
+func RegistraLog(site string, status bool) {
+
+	arquivo, err := os.OpenFile("logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro.")
+	}
+
+	arquivo.WriteString(time.Now().Format("02/01/2006 15:04:05") + " - " + site + " Online: " + strconv.FormatBool(status) + "\n")
+	arquivo.Close()
+}
+
+func MostarLogs() {
+
+	arquivo, err := ioutil.ReadFile("logs.txt")
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro")
+	}
+
+	fmt.Println(string(arquivo))
 }

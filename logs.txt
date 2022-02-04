@@ -1,0 +1,12 @@
+04/02/2022 09:50:35 - https://alura.com.brOnline: true
+04/02/2022 09:50:35 - http://facebook.com.brOnline: true
+04/02/2022 09:50:35 - https://gscalculadora.netlify.app/Online: true
+04/02/2022 09:50:35 - http://pudim.com.brOnline: true
+04/02/2022 09:50:43 - https://alura.com.brOnline: true
+04/02/2022 09:50:43 - http://facebook.com.brOnline: true
+04/02/2022 09:50:43 - https://gscalculadora.netlify.app/Online: true
+04/02/2022 09:50:43 - http://pudim.com.brOnline: true
+04/02/2022 09:51:27 - https://alura.com.brOnline: true
+04/02/2022 09:51:27 - http://facebook.com.brOnline: true
+04/02/2022 09:51:27 - https://gscalculadora.netlify.app/Online: true
+04/02/2022 09:51:28 - http://pudim.com.br/teOnline: false
