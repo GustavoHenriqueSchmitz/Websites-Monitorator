@@ -1,2 +1,2 @@
 # WebSites Monitor
- Monitorate if sites are available or not.
+ Monitorate if WebSites are available or not.
