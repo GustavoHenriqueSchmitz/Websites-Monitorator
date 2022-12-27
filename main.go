@@ -87,20 +87,21 @@ func testWebsites() {
 			}
 
 			site = strings.TrimSpace(site)
-			response, err := http.Get(site)
+			response, err := http.Get("http://" + site)
 
 			if err != nil {
-				fmt.Println("Erro ao tentar monitorar o site.")
+				fmt.Println("Erro ao tentar monitorar o site:", err)
+				continue
 			}
 
 			if response.StatusCode == 200 {
 				fmt.Println(time.Now().Format("02/01/2006 15:04:05") + " - " + site + "   Online: " + strconv.FormatBool(true))
 				results := (time.Now().Format("02/01/2006 15:04:05") + " - " + site + "   Online: " + strconv.FormatBool(true) + "\n")
-				registrateLogs(string(results))
+				registrateLogs(results)
 			} else {
-				fmt.Println(time.Now().Format("02/01/2006 15:04:05") + " - " + site + "   Online: " + strconv.FormatBool(false) + " -> Status-Code: " + string(response.StatusCode))
+				fmt.Println(time.Now().Format("02/01/2006 15:04:05") + " - " + site + "   Online: " + strconv.FormatBool(false) + " -> Status-Code: " + strconv.Itoa(response.StatusCode))
 				results := (time.Now().Format("02/01/2006 15:04:05") + " - " + site + "   Online: " + strconv.FormatBool(false) + " -> Status-Code: " + strconv.Itoa(response.StatusCode) + "\n")
-				registrateLogs(string(results))
+				registrateLogs(results)
 			}
 
 		}
@@ -114,14 +115,33 @@ func showLogs() {
 	fmt.Println("----------------------------------------------")
 	fmt.Println("Mostrando Logs")
 	fmt.Println("----------------------------------------------")
+
+	file, err := os.ReadFile("logs.txt")
+
+	if err != nil {
+		fmt.Println("Erro ao ler arquivo de logs:", err)
+	}
+
+	fmt.Println(string(file))
 }
 
-func addWebsites() string {
+func addWebsites() {
 	fmt.Println("----------------------------------------------")
 	fmt.Print("Digite o site a ser adicionado para análise: ")
 	var site string
 	fmt.Scan(&site)
-	return site
+
+	file, err := os.OpenFile("websites.txt", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
+
+	if err != nil {
+		fmt.Println("Erro ao adicionar site.")
+	}
+
+	_, err = file.WriteString(site + "\n")
+
+	if err != nil {
+		fmt.Println("Erro ao adicionar site.")
+	}
 }
 
 func registrateLogs(results string) {
@@ -129,7 +149,7 @@ func registrateLogs(results string) {
 	file, err := os.OpenFile("logs.txt", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
 
 	if err != nil {
-		fmt.Println("Erro ao abrir o file de logs.")
+		fmt.Println("Erro ao abrir o arquivo de logs.")
 	}
 
 	file.WriteString(results)

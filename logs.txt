@@ -1,0 +1,42 @@
+26/12/2022 20:48:15 - http://teste.com   Online: false -> Status-Code: 403
+26/12/2022 20:48:40 - http://teste.com   Online: false -> Status-Code: 403
+26/12/2022 20:48:47 - http://teste.com   Online: false -> Status-Code: 403
+26/12/2022 20:49:29 - https://google.com   Online: true
+26/12/2022 21:02:35 - http://google.com   Online: true
+26/12/2022 21:29:38 - google.com   Online: true
+26/12/2022 21:29:53 - google.com   Online: true
+26/12/2022 21:29:54 - teste.com   Online: false -> Status-Code: 403
+26/12/2022 21:30:24 - google.com   Online: true
+26/12/2022 21:30:24 - teste.com   Online: false -> Status-Code: 403
+26/12/2022 21:30:27 - pudim.com   Online: false -> Status-Code: 403
+26/12/2022 21:31:21 - google.com   Online: true
+26/12/2022 21:31:21 - teste.com   Online: false -> Status-Code: 403
+26/12/2022 21:31:22 - pudim.com   Online: false -> Status-Code: 403
+26/12/2022 21:31:22 - pudim.com.br   Online: true
+26/12/2022 21:35:02 - google.com   Online: true
+26/12/2022 21:35:02 - teste.com   Online: false -> Status-Code: 403
+26/12/2022 21:35:03 - pudim.com   Online: false -> Status-Code: 403
+26/12/2022 21:35:03 - pudim.com.br   Online: true
+26/12/2022 21:35:19 - google.com   Online: true
+26/12/2022 21:35:20 - teste.com   Online: false -> Status-Code: 403
+26/12/2022 21:35:20 - pudim.com   Online: false -> Status-Code: 403
+26/12/2022 21:35:20 - pudim.com.br   Online: true
+26/12/2022 21:36:54 - google.com   Online: true
+26/12/2022 21:36:54 - teste.com   Online: false -> Status-Code: 403
+26/12/2022 21:36:57 - pudim.com   Online: false -> Status-Code: 403
+26/12/2022 21:36:57 - pudim.com.br   Online: true
+26/12/2022 21:47:21 - google.com   Online: true
+26/12/2022 21:47:22 - teste.com   Online: false -> Status-Code: 403
+26/12/2022 21:47:23 - pudim.com   Online: false -> Status-Code: 403
+26/12/2022 21:47:23 - pudim.com.br   Online: true
+26/12/2022 21:47:37 - google.com   Online: true
+26/12/2022 21:47:37 - teste.com   Online: false -> Status-Code: 403
+26/12/2022 21:47:38 - pudim.com   Online: false -> Status-Code: 403
+26/12/2022 21:47:38 - pudim.com.br   Online: true
+26/12/2022 21:47:39 - helllo.com   Online: false -> Status-Code: 410
+26/12/2022 21:55:05 - google.com   Online: true
+26/12/2022 21:55:05 - teste.com   Online: false -> Status-Code: 403
+26/12/2022 21:55:06 - pudim.com   Online: false -> Status-Code: 403
+26/12/2022 21:55:06 - pudim.com.br   Online: true
+26/12/2022 21:55:07 - helllo.com   Online: false -> Status-Code: 410
+26/12/2022 21:55:10 - ola.com   Online: true
