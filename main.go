@@ -14,7 +14,21 @@ import (
 const monitoring = 5
 const delay_minutes = 5
 
+var websitesFile *os.File
+var logsFile *os.File
+var err error
+
 func main() {
+
+	websitesFile, err = os.OpenFile("websites.txt", os.O_APPEND|os.O_RDWR|os.O_CREATE, 0666)
+	if err != nil {
+		fmt.Println("Erro ao tentar abrir arquivo de websites.")
+	}
+
+	logsFile, err = os.OpenFile("logs.txt", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		fmt.Println("Erro ao tentar abrir arquivo de logs.")
+	}
 
 	for {
 		fmt.Println("----------------------------------------------")
@@ -52,31 +66,21 @@ func testWebsites() {
 	fmt.Println("----------------------------------------------")
 
 	for {
-		file, err := os.OpenFile("websites.txt", os.O_RDONLY|os.O_CREATE, 0666)
 
-		if err != nil {
-			fmt.Println("Ouve um erro, ao tentar abrir o arquivo.")
-			break
-		}
-
-		sizeFile, err := file.Stat()
-
-		if sizeFile.Size() == 0 {
+		size, err := websitesFile.Stat()
+		if size.Size() == 0 {
 			fmt.Println("Não há nenhum site adicionado a ser analizado.")
 			break
-		}
-
-		if err != nil {
+		} else if err != nil {
 			fmt.Println("Ouve um erro, ao ler o arquivo.")
 			break
 		}
 
-		readedFile := bufio.NewReader(file)
+		readedFile := bufio.NewReader(websitesFile)
 
 		for {
 
 			site, err := readedFile.ReadString('\n')
-
 			if err == io.EOF {
 				break
 			}
@@ -105,10 +109,9 @@ func testWebsites() {
 			}
 
 		}
-
-		file.Close()
 		break
 	}
+	websitesFile.Seek(0, io.SeekStart)
 }
 
 func showLogs() {
@@ -116,13 +119,12 @@ func showLogs() {
 	fmt.Println("Mostrando Logs")
 	fmt.Println("----------------------------------------------")
 
-	file, err := os.ReadFile("logs.txt")
-
+	logs, err := os.ReadFile("logs.txt")
 	if err != nil {
 		fmt.Println("Erro ao ler arquivo de logs:", err)
 	}
 
-	fmt.Println(string(file))
+	fmt.Println(string(logs))
 }
 
 func addWebsites() {
@@ -131,27 +133,15 @@ func addWebsites() {
 	var site string
 	fmt.Scan(&site)
 
-	file, err := os.OpenFile("websites.txt", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
-
+	_, err = websitesFile.WriteString(site + "\n")
 	if err != nil {
 		fmt.Println("Erro ao adicionar site.")
 	}
 
-	_, err = file.WriteString(site + "\n")
-
-	if err != nil {
-		fmt.Println("Erro ao adicionar site.")
-	}
+	websitesFile.Seek(0, io.SeekStart)
 }
 
 func registrateLogs(results string) {
-
-	file, err := os.OpenFile("logs.txt", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
-
-	if err != nil {
-		fmt.Println("Erro ao abrir o arquivo de logs.")
-	}
-
-	file.WriteString(results)
-	file.Close()
+	logsFile.WriteString(results)
+	logsFile.Seek(0, io.SeekStart)
 }

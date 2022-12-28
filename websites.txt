@@ -1,7 +1,0 @@
-localhost:3000
-google.com
-teste.com
-pudim.com
-pudim.com.br
-helllo.com
-ola.com
