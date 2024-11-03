@@ -6,6 +6,20 @@ A project made in Golang, a simple program that checks if a determined website i
 ## Used technologies
 - Golang
 
+## Installation
+**1 -** Clone the project:
+```
+git clone https://github.com/GustavoHenriqueSchmitz/Websites-Monitorator.git
+```
+
+**2 -** Install [Golang V1.18.1](https://go.dev/dl/)
+
+## Initialization
+**1 -** Just run the command:
+```
+go run main.go
+```
+
 ## Author
 **Gustavo Henrique Schmitz**
 
