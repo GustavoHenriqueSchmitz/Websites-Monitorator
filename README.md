@@ -7,12 +7,12 @@ A project made in Golang, a simple program that checks if a determined website i
 - Golang
 
 ## Installation
-**1 -** Clone the project:
+**1 -** Install [Golang V1.18.1](https://go.dev/dl/)
+
+**2 -** Clone the project:
 ```
 git clone https://github.com/GustavoHenriqueSchmitz/Websites-Monitorator.git
 ```
-
-**2 -** Install [Golang V1.18.1](https://go.dev/dl/)
 
 ## Initialization
 **1 -** Just run the command:
